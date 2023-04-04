@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="index.js"></script>
         <title>
             Simulation Project
@@ -10,25 +11,25 @@
         <div>
             <form action="">
                 <label for="">Block Size</label>
-                <input type="number" name="block_size" id="" required>
+                <input type="number" name="block_size" id="block_size" required>
                 <label for="">Main Memory Size</label>
-                <input type="number" name="main_memory_size" id="" required>
-                <select name="format1" id="">
+                <input type="number" name="main_memory_size" id="main_memory_size" required>
+                <select name="format1" id="mm_type">
                     <option value="blocks"> Blocks </option>
                     <option value="words"> Words </option>
                 </select>
                 <label for="">Cache Size</label>
-                <input type="number" name="cache_size" id="" required>
-                <select name="format2" id="">
+                <input type="number" name="cache_size" id="cache_size" required>
+                <select name="format2" id="cache_type">
                     <option value="blocks"> Blocks </option>
                     <option value="words"> Words </option>
                 </select>
                 <label for="">Memory Block Sequence</label>
-                <input type="text" name="memory_block_sequence" id="" required>
+                <input type="text" name="memory_block_sequence" id="memory_block_sequence" required>
                 <label for="">Cache Access Time</label>
-                <input type="number" name="memory_block_sequence" id="" required>
+                <input type="number" name="cache_access_time" id="cache_access_time" required>
                 <label for="">Memory Access Time</label>
-                <input type="number" name="memory_block_sequence" id="" required>
+                <input type="number" name="memory_access_time" id="memory_access_time" required>
                 <button id="submit" type="submit">Submit</button>
             </form>
         </div>
