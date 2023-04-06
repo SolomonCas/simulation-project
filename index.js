@@ -1,6 +1,6 @@
 $(document).ready(function(){
     submitButton = document.getElementById("submit");
-    submitButton.addEventListener("click", function(e){
+    $("#input_form").submit(function(e){
         e.preventDefault();
         console.log("submit function");
         block_size = parseInt($("#block_size").val());
