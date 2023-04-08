@@ -26,7 +26,13 @@ $(document).ready(function(){
 
         sequence = memory_block_sequence.split(",");
         if(main_memory_size != sequence.length){
-            alert("Incorrect memory size or sequence length");
+            alert("Incorrect main memory size or sequence length");
+        }
+        else if (main_memory_size < 1) {
+            alert("Main memory size (in words) should be greater than or equal to block size");
+        }
+        else if (cache_size < 1) {
+            alert("Cache memory size (in words) should be greater than or equal to block size")
         }
         else {
             hit = 0;
@@ -58,85 +64,84 @@ $(document).ready(function(){
                     miss++;
                 }
                 
-            }
+                
+                avg_memory_access_time = (hit/sequence.length) * cache_access_time + (miss/sequence.length) * miss_penalty;
+                total_memory_access_time = (hit * 2 * cache_access_time) + (miss * 2 * (cache_access_time + memory_access_time)) +(miss * cache_access_time);
+                //
+                //OUTPUT
+                console.log("Data in Cache Memory: " + cache_memory);
+                console.log("Number of Cache Hits: " + hit);
+                console.log("Number of Cache Miss: " + miss);
+                console.log("Miss Penalty: " + miss_penalty);
+                console.log("Avg Memory Access Time: " + avg_memory_access_time);
+                console.log("Total Memory Access Time: " + total_memory_access_time);
+                
+                //Cache Memory Table
+                //Create Elements
+                $("#outputs").empty();
+                let parent = $("#outputs");
+                let div_table = document.createElement("div");
+                let table = document.createElement("table");
+                let table_head_row = document.createElement("tr");
+                let table_header_block = document.createElement("th");
+                let table_header_data = document.createElement("th");
+                let div_paragraph = document.createElement("div");
 
-            avg_memory_access_time = (hit/sequence.length) * cache_access_time + (miss/sequence.length) * miss_penalty;
-            total_memory_access_time = (hit * 2 * cache_access_time) + (miss * 2 * (cache_access_time + memory_access_time)) +(miss * cache_access_time);
-            //
-            //OUTPUT
-            console.log("Data in Cache Memory: " + cache_memory);
-            console.log("Number of Cache Hits: " + hit);
-            console.log("Number of Cache Miss: " + miss);
-            console.log("Miss Penalty: " + miss_penalty);
-            console.log("Avg Memory Access Time: " + avg_memory_access_time);
-            console.log("Total Memory Access Time: " + total_memory_access_time);
-            
-            //Cache Memory Table
-            //Create Elements
-            $("#outputs").empty();
-            let parent = $("#outputs");
-            let div_table = document.createElement("div");
-            let table = document.createElement("table");
-            let table_head_row = document.createElement("tr");
-            let table_header_block = document.createElement("th");
-            let table_header_data = document.createElement("th");
-            let div_paragraph = document.createElement("div");
+                let paragraph_num_cache_hits = document.createElement("p");
+                let num_cache_hits_text = document.createTextNode("Number of Cache Hits: " + hit);
+                
+                let paragraph_num_cache_miss = document.createElement("p");
+                let num_cache_miss_text = document.createTextNode("Number of Cache Miss: " + miss);
+                
+                let paragraph_miss_penalty = document.createElement("p");
+                let miss_penalty_text = document.createTextNode("Miss Penalty: " + miss_penalty);
+                
+                let paragraph_avg_memory_access_time = document.createElement("p");
+                let avg_memory_access_time_text = document.createTextNode("Avg Memory Access Time (ns): " + avg_memory_access_time);
 
-            let paragraph_num_cache_hits = document.createElement("p");
-            let num_cache_hits_text = document.createTextNode("Number of Cache Hits: " + hit);
-            
-            let paragraph_num_cache_miss = document.createElement("p");
-            let num_cache_miss_text = document.createTextNode("Number of Cache Miss: " + miss);
-            
-            let paragraph_miss_penalty = document.createElement("p");
-            let miss_penalty_text = document.createTextNode("Miss Penalty: " + miss_penalty);
-            
-            let paragraph_avg_memory_access_time = document.createElement("p");
-            let avg_memory_access_time_text = document.createTextNode("Avg Memory Access Time (ns): " + avg_memory_access_time);
+                let paragraph_total_memory_access_time = document.createElement("p");
+                let total_memory_access_time_text = document.createTextNode("Total Memory Access Time (ns): " + total_memory_access_time);
+                //Add classes
+                $(div_paragraph).addClass("div-paragraph");
+                // Set Hierarchy
+                $(table_head_row).append(table_header_block);
+                $(table_head_row).append(table_header_data);
 
-            let paragraph_total_memory_access_time = document.createElement("p");
-            let total_memory_access_time_text = document.createTextNode("Total Memory Access Time (ns): " + total_memory_access_time);
-            //Add classes
-            $(div_paragraph).addClass("div-paragraph");
-            // Set Hierarchy
-            $(table_head_row).append(table_header_block);
-            $(table_head_row).append(table_header_data);
+                $(table).append(table_head_row);
+                $(paragraph_num_cache_hits).append(num_cache_hits_text);
+                $(paragraph_num_cache_miss).append(num_cache_miss_text);
+                $(paragraph_miss_penalty).append(miss_penalty_text);
+                $(paragraph_avg_memory_access_time).append(avg_memory_access_time_text);
+                $(paragraph_total_memory_access_time).append(total_memory_access_time_text);
 
-            $(table).append(table_head_row);
-            $(paragraph_num_cache_hits).append(num_cache_hits_text);
-            $(paragraph_num_cache_miss).append(num_cache_miss_text);
-            $(paragraph_miss_penalty).append(miss_penalty_text);
-            $(paragraph_avg_memory_access_time).append(avg_memory_access_time_text);
-            $(paragraph_total_memory_access_time).append(total_memory_access_time_text);
+                $(div_table).append(table);
+                $(div_paragraph).append(paragraph_num_cache_hits);
+                $(div_paragraph).append(paragraph_num_cache_miss);
+                $(div_paragraph).append(paragraph_miss_penalty);
+                $(div_paragraph).append(paragraph_avg_memory_access_time);
+                $(div_paragraph).append(paragraph_total_memory_access_time);
 
-            $(div_table).append(table);
-            $(div_paragraph).append(paragraph_num_cache_hits);
-            $(div_paragraph).append(paragraph_num_cache_miss);
-            $(div_paragraph).append(paragraph_miss_penalty);
-            $(div_paragraph).append(paragraph_avg_memory_access_time);
-            $(div_paragraph).append(paragraph_total_memory_access_time);
-
-            $(parent).append(div_table);
-            $(parent).append(div_paragraph);
-            // Set Content
-            $(table_header_block).text("Block");
-            $(table_header_data).text("Data");
-
-            for(let i = 0; i < cache_size; i++) {
-                // Create ELement for data
-                let table_row = document.createElement("tr");
-                let table_header_block_number = document.createElement("th");
-                let table_header_data_number = document.createElement("th");
-                // Set Hierarchy for data
-                $(table_row).append(table_header_block_number);
-                $(table_row).append(table_header_data_number);
-
-                $(table).append(table_row);
+                $(parent).append(div_table);
+                $(parent).append(div_paragraph);
                 // Set Content
-                $(table_header_block_number).text(i);
-                $(table_header_data_number).text(cache_memory[i]);
-            }
+                $(table_header_block).text("Block");
+                $(table_header_data).text("Data");
 
+                for(let i = 0; i < cache_size; i++) {
+                    // Create ELement for data
+                    let table_row = document.createElement("tr");
+                    let table_header_block_number = document.createElement("th");
+                    let table_header_data_number = document.createElement("th");
+                    // Set Hierarchy for data
+                    $(table_row).append(table_header_block_number);
+                    $(table_row).append(table_header_data_number);
+
+                    $(table).append(table_row);
+                    // Set Content
+                    $(table_header_block_number).text(i);
+                    $(table_header_data_number).text(cache_memory[i]);
+                }
+            }
             //enable download button
             $("#download").prop('disabled', false);
 
