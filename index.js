@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    var cache_memory, hit, miss, miss_penalty, avg_memory_access_time, total_memory_access_time;
+
     console.log("Document Ready");
     submitButton = document.getElementById("submit");
     $("#input_form").submit(function(e){
@@ -27,13 +29,13 @@ $(document).ready(function(){
             alert("Incorrect memory size or sequence length");
         }
         else {
-            var hit = 0;
-            var miss = 0;
-            var recent_block = 0;
-            var placed = false;
+            hit = 0;
+            miss = 0;
+            recent_block = 0;
+            placed = false;
             // cache_memory[cache_size][0] == Block, cache_memory[cache_size][1] == Data
             
-            var cache_memory = new Array(cache_size); 
+            cache_memory = new Array(cache_size); 
             for(let i = 0; i < sequence.length; i++){
                 placed = false;
                 for(let j = 0; j < cache_size; j++) {
@@ -58,8 +60,8 @@ $(document).ready(function(){
                 
             }
 
-            var avg_memory_access_time = (hit/sequence.length) * cache_access_time + (miss/sequence.length) * miss_penalty;
-            var total_memory_access_time = (hit * 2 * cache_access_time) + (miss * 2 * (cache_access_time + memory_access_time)) +(miss * cache_access_time);
+            avg_memory_access_time = (hit/sequence.length) * cache_access_time + (miss/sequence.length) * miss_penalty;
+            total_memory_access_time = (hit * 2 * cache_access_time) + (miss * 2 * (cache_access_time + memory_access_time)) +(miss * cache_access_time);
             //
             //OUTPUT
             console.log("Data in Cache Memory: " + cache_memory);
@@ -138,24 +140,28 @@ $(document).ready(function(){
             //enable download button
             $("#download").prop('disabled', false);
 
-            document.getElementById("download").addEventListener("click", function(){
-                var output = `Data in Cache Memory: ${cache_memory}\nNumber of Cache Hits: ${hit}\nNumber of Cache Miss: ${miss}\nMiss Penalty: ${miss_penalty}\nAvg Memory Access Time: ${avg_memory_access_time}\nTotal Memory Access Time: ${total_memory_access_time}`
-                download("output.txt", output);
-            }, false);
-
-
         }
 
-        function download(filename, text) {
-            var element = document.createElement("a");
-            element.style.display = "none";
-            element.setAttribute("href", "data:text.plain;charset=utf-8," + encodeURIComponent(text));
-            element.setAttribute("download", filename);
-            document.body.appendChild(element);
-
-            element.click();
-
-            document.body.removeChild(element);
-        }
+        
     });
+
+    document.getElementById("download").addEventListener("click", function(){
+        var output = `Data in Cache Memory: ${cache_memory}\nNumber of Cache Hits: ${hit}\nNumber of Cache Miss: ${miss}\nMiss Penalty: ${miss_penalty}\nAvg Memory Access Time: ${avg_memory_access_time}\nTotal Memory Access Time: ${total_memory_access_time}`
+        download("output.txt", output);
+    }, false);
+
+
+    function download(filename, text) {
+        var element = document.createElement("a");
+        element.style.display = "none";
+        element.setAttribute("href", "data:text.plain;charset=utf-8," + encodeURIComponent(text));
+        console.log(element.href)
+        element.setAttribute("download", filename);
+        document.body.appendChild(element);
+
+        element.click();
+        
+        document.body.removeChild(element);
+    }
+
 });
