@@ -19,26 +19,25 @@ body{
 }
 
 h1{
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--lilac);
     padding: 0;
-    margin: 0;
+    margin: 20px;
     text-align: center;
 }
 
 #inputs{
-    width: 20rem;
+    width: 30rem;
     display: flex;
     justify-content: center;
     align-self: center;
     flex-direction: column;
-    padding: 2%;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
     margin: 0;
-    background-color: #282828;
+    background-color: #202020;
     border-radius: 10px;
 }
-
 
 form{
     display: flex;
@@ -46,11 +45,25 @@ form{
     color: white;
 }
 
+form > label{
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    color: #c5c5c5;
+}
+
 input{
+    font-size: 1.2rem;
     border-radius: 5px;
-    background-color: #575757;
+    background-color: #282828;
     color: white;
-    outline: 0;
+    border: 2px solid #282828;
+    padding: 10px;
+    outline: none;
+}
+
+input:focus{
+    border-color: #8b86fc;
 }
 
 select{
@@ -63,10 +76,11 @@ select{
 }
 
 button{
-   color: #282828;
-   font-weight: 700;
-   font-size: 1rem;
+   color: #121212;
+   font-weight: 100;
+   font-size: 1.5rem;
    border-radius: 5px;
+   border: none;
    margin-top: 10px;
 }
 
@@ -75,7 +89,7 @@ button:enabled{
 }
 
 button:hover:enabled{
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 /*Cache table view*/
