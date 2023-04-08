@@ -74,3 +74,16 @@ button{
 button:hover{
     transform: scale(1.05);
 }
+/*Cache table view*/
+table, th, td {
+    border: 1px solid white;
+}
+
+#outputs{
+    color: var(--lilac);
+    flex-direction: column;
+}
+
+.div-paragraph {
+    flex-direction: column;
+}
