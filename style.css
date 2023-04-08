@@ -63,7 +63,6 @@ select{
 }
 
 button{
-   background-color: #8b86fc;
    color: #282828;
    font-weight: 700;
    font-size: 1rem;
@@ -71,9 +70,14 @@ button{
    margin-top: 10px;
 }
 
-button:hover{
+button:enabled{
+   background-color: #8b86fc;
+}
+
+button:hover:enabled{
     transform: scale(1.05);
 }
+
 /*Cache table view*/
 table, th, td {
     border: 1px solid white;

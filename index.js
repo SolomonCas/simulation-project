@@ -90,10 +90,10 @@ $(document).ready(function(){
             let miss_penalty_text = document.createTextNode("Miss Penalty: " + miss_penalty);
             
             let paragraph_avg_memory_access_time = document.createElement("p");
-            let avg_memory_access_time_text = document.createTextNode("Avg Memory Access Time: " + avg_memory_access_time);
+            let avg_memory_access_time_text = document.createTextNode("Avg Memory Access Time (ns): " + avg_memory_access_time);
 
             let paragraph_total_memory_access_time = document.createElement("p");
-            let total_memory_access_time_text = document.createTextNode("Total Memory Access Time: " + total_memory_access_time);
+            let total_memory_access_time_text = document.createTextNode("Total Memory Access Time (ns): " + total_memory_access_time);
             //Add classes
             $(div_paragraph).addClass("div-paragraph");
             // Set Hierarchy
@@ -134,8 +134,28 @@ $(document).ready(function(){
                 $(table_header_block_number).text(i);
                 $(table_header_data_number).text(cache_memory[i]);
             }
-        
 
+            //enable download button
+            $("#download").prop('disabled', false);
+
+            document.getElementById("download").addEventListener("click", function(){
+                var output = `Data in Cache Memory: ${cache_memory}\nNumber of Cache Hits: ${hit}\nNumber of Cache Miss: ${miss}\nMiss Penalty: ${miss_penalty}\nAvg Memory Access Time: ${avg_memory_access_time}\nTotal Memory Access Time: ${total_memory_access_time}`
+                download("output.txt", output);
+            }, false);
+
+
+        }
+
+        function download(filename, text) {
+            var element = document.createElement("a");
+            element.style.display = "none";
+            element.setAttribute("href", "data:text.plain;charset=utf-8," + encodeURIComponent(text));
+            element.setAttribute("download", filename);
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
         }
     });
 });
