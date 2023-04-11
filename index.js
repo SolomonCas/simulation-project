@@ -18,25 +18,7 @@ $(document).ready(function(){
         memory_access_time = parseInt($("#memory_access_time").val());
         
         read_mode = $("#read_mode").val();
-        if(read_mode == "load"){
-            miss_penalty = cache_access_time + (memory_access_time * block_size); // Load Through
-        }
-        else{
-            miss_penalty = (cache_access_time * 2) + (memory_access_time * block_size); // No load Through
-        }
         
-        
-        console.log("");
-
-        if(mm_type == "words") {
-            main_memory_size = Math.round(main_memory_size / block_size);
-        }
-        if(cache_type == "words") {
-            cache_size = Math.round(cache_size / block_size); 
-            if(cache_size < 1){
-                cache_size = 1;
-            }
-        }
 
         sequence = memory_block_sequence.split(",");
 
@@ -48,6 +30,28 @@ $(document).ready(function(){
             alert("Error: Negative size or time value is invalid!");
         }
         else {
+            if(read_mode == "load"){
+                miss_penalty = cache_access_time + (memory_access_time * block_size); // Load Through
+            }
+            else{
+                miss_penalty = (cache_access_time * 2) + (memory_access_time * block_size); // No load Through
+            }
+            
+            
+            console.log("");
+    
+            if(mm_type == "words") {
+                main_memory_size = Math.round(main_memory_size / block_size);
+                if(main_memory_size < 1){
+                    main_memory_size = 1;
+                }
+            }
+            if(cache_type == "words") {
+                cache_size = Math.round(cache_size / block_size); 
+                if(cache_size < 1){
+                    cache_size = 1;
+                }
+            }
             hit = 0;
             miss = 0;
             placed = false;
