@@ -99,9 +99,12 @@ table, th, td {
 
 #outputs{
     color: var(--lilac);
-    flex-direction: column;
 }
 
 .div-paragraph {
     flex-direction: column;
+}
+
+#container{
+    display: flex;
 }
