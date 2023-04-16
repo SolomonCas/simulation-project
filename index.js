@@ -164,6 +164,7 @@ $(document).ready(function(){
             let total_memory_access_time_text = document.createTextNode("Total Memory Access Time (ns): " + total_memory_access_time);
             //Add classes
             $(div_paragraph).addClass("div-paragraph");
+            $(div_table).addClass("div-table");
             // Set Hierarchy
             $(table_head_row).append(table_header_block);
             $(table_head_row).append(table_header_data);

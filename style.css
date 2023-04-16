@@ -4,13 +4,27 @@
     --lilac: #8b86fc;
 }
 
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    width: 5px;
+    background: #202020;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--lilac);
+    border-radius: 5px;
+}
+
+
 html,
 body{
-    margin: 0;
     padding: 0;
     background-color: #121212;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,12 +43,13 @@ h1{
 
 #inputs{
     width: 30rem;
+    height: 40rem;
     display: flex;
     justify-content: center;
     align-self: center;
     flex-direction: column;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
-    margin: 0;
+    margin: 1rem;
     background-color: #202020;
     border-radius: 10px;
 }
@@ -75,6 +90,14 @@ select{
     text-align: center;
 }
 
+#read_mode{
+    font-weight: 100;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    border: none;
+}
+
 button{
    color: #121212;
    font-weight: 100;
@@ -98,13 +121,49 @@ table, th, td {
 }
 
 #outputs{
-    color: var(--lilac);
+    margin: 1rem;
+    display: flex;
+    height: 40rem;
+}
+
+.div-table{
+    margin: 0rem 1rem 0rem 0rem;
+    overflow-y: scroll;
+    padding: 1rem;
+    background-color: #202020;
+    height: 40.5rem;
+    border-radius: 10px;
 }
 
 .div-paragraph {
     flex-direction: column;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    background-color: #202020;
+    border-radius: 10px;
+    height: 20rem;
+}
+
+.div-paragraph > p{
+    margin-top: 0;
+    padding: 1rem;
+    background-color: #282828;
+    border-radius: 5px;
+    color: #c5c5c5
 }
 
 #container{
     display: flex;
 }
+
+table{
+    border-collapse: collapse;
+    border: 1px inset var(--lilac)
+}
+
+
+tr,th{
+    background-color: #282828;
+    padding: 0.5rem;
+    color:#c5c5c5;
+}
+
